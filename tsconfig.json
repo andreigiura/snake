@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "ES2015",
+        "module": "ES2015",
+        "skipLibCheck": true,
+        "experimentalDecorators": true
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
