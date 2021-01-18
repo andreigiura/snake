@@ -39,9 +39,7 @@ export class Sprite extends HTMLElement{
     private _width: number;
     private _height: number;
 
-    constructor() {
-        super();
-    }
+
 
     // connectedCallback() {
     //     const elm = document.createElement('h3');

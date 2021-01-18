@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
 
     // bundling mode
-    mode: 'production',
+    mode: 'development',
 
     // entry files
     entry: './src/main.ts',
