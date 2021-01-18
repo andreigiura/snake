@@ -4,13 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <title>Snake game</title>
 </head>
 
 <body>
-  <div id="gameArea" style="border: solid 1px; position: relative; height: 300px; width: 300px; margin: auto;">
+  <div
+    style="display: flex; height: 100%; position: absolute; top:0px; left: 0px; width: 100%;  flex-direction: column; justify-content: center; background-color: #3e3e3e">
+    
+    <div id="gameArea" style="position: relative; height: 300px; width: 300px; margin: auto; background-color: #fff;">
+      <div id="scoreArea" style="position: absolute; left: 0px; top: -20px;"></div>
+    </div>
+
+    
   </div>
+
 
 
   <script src="dist/bundle.js"></script>
