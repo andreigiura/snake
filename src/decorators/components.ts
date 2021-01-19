@@ -26,7 +26,12 @@ export const Component = (config: ComponentConfig) => (cls: any) => {
     cls.prototype.connectedCallback = function () {
         const clone = document.importNode(template.content, true);
         if (config.useShadow) {
-            this.attachShadow({ mode: 'open' }).appendChild(clone);
+            try {
+                this.attachShadow({ mode: 'open' }).appendChild(clone);
+            } catch (error) {
+                
+            }
+            
         } else {
             this.appendChild(clone);
         }
