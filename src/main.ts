@@ -31,19 +31,19 @@ export class Game {
 
         this.snakeHead.x = Math.floor(Math.random() * (parseInt(this.gameArea.style.width) - 0 + 1))/2;
         this.snakeHead.y = Math.floor(Math.random() * (parseInt(this.gameArea.style.height) - 0 + 1))/2;
-        this.snakeHead.width = 10;
-        this.snakeHead.height = 10;
+        this.snakeHead.width = 30;
+        this.snakeHead.height = 30;
 
         this.food.x = Math.floor(Math.random() * (parseInt(this.gameArea.style.width) - 0 + 1)) - this.food.width;
         this.food.y = Math.floor(Math.random() * (parseInt(this.gameArea.style.height) - 0 + 1));
-        this.food.width = 10;
-        this.food.height = 10;
+        this.food.width = 25;
+        this.food.height = 25;
         this.food.className = "food";
 
         this.specialFood.x = Math.floor(Math.random() * (parseInt(this.gameArea.style.width) - 0 + 1)) - this.food.width;
         this.specialFood.y = Math.floor(Math.random() * (parseInt(this.gameArea.style.height) - 0 + 1));
-        this.specialFood.width = 10;
-        this.specialFood.height = 10;
+        this.specialFood.width = 35;
+        this.specialFood.height = 35;
         this.specialFood.className = "specialFood";
 
         document.addEventListener("keydown", (event) => {

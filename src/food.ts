@@ -4,10 +4,9 @@ import { Sprite } from "./sprite";
 
 @Component({
     selector: 'food-component',
-    template: `<div ></div>`,
+    template: `<img style="width:100%; top: 0px; left: 0px; position: absolute;" src="./dist/assets/APPLE.png" />`,
     style: `:host {
       position: absolute;
-      background: #000;
     }`,
     useShadow: true
 })

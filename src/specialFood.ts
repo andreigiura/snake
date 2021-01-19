@@ -4,10 +4,9 @@ import { Sprite } from "./sprite";
 
 @Component({
     selector: 'special-food-component',
-    template: `<div ></div>`,
+    template: `<img style="width:100%; top: 0px; left: 0px; position: absolute;" src="./dist/assets/mouse.png" />`,
     style: `:host {
       position: absolute;
-      background: green;
     }`,
     useShadow: true
 })

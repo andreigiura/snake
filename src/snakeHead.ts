@@ -7,10 +7,9 @@ import { Sprite } from "./sprite";
 
 @Component({
     selector: 'snake-head',
-    template: `<div id="zz"></div>`,
+    template: `<img style="width:100%; top: 0px; left: 0px; position: absolute;" src="./dist/assets/HEAD.png" />`,
     style: `:host {
       position: absolute;
-      background: #ff0000;
     }`,
     useShadow: true
 })
@@ -24,9 +23,9 @@ export class SnakeHead extends SnakeElement {
     }
 
     private _direction = SnakeHead.Directions.RIGHT;
-    private snakeSize = 1000;
+    private snakeSize = 2000;
     private eaten = false;
-    private speed =6;
+    private speed =4;
     private biteWeight = 1000;
 
     private gameOver = false;
@@ -36,7 +35,6 @@ export class SnakeHead extends SnakeElement {
 
     constructor(isClone: boolean = false, ttl: number = 0) {
         super();
-
         if (!isClone) {
            this.gameLoopInterval = setInterval(() => {
                 this.move();
@@ -60,23 +58,23 @@ export class SnakeHead extends SnakeElement {
             return;
 
         const snakeElement = new SnakeElement(true, this.snakeSize / this.speed);
-        snakeElement.x = this.x;
-        snakeElement.y = this.y;
-        snakeElement.width = this.width;
-        snakeElement.height = this.height;
+        snakeElement.x = this.x+this.width/4;
+        snakeElement.y = this.y+this.width/4;
+        snakeElement.width = this.width/2;
+        snakeElement.height = this.height/2;
 
 
         setTimeout(() => {
             snakeElement.className = "snakeElement";
         }, 700);
-        this.parentElement.appendChild(snakeElement);
+        this.parentElement.prepend(snakeElement);
 
         if (this.eaten) {
-            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.height = `${this.height + 2}px`;
-            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.width = `${this.width + 2}px`;
+            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.height = `${this.height/2 + 2}px`;
+            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.width = `${this.width/2 + 2}px`;
             snakeElement.x -= 1;
             snakeElement.y -= 1;
-            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.backgroundColor = '#009cff';
+            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.backgroundColor = '#569c59';
 
             if(this.numberOfBites == 5) {
                 this.numberOfBites = 0;
@@ -103,6 +101,11 @@ export class SnakeHead extends SnakeElement {
         if (this.foodCollision(this, specialFood)) {
             specialFood.hide();
             Score.getInstance().addScore(70);
+            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.height = `${this.height/2 + 2}px`;
+            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.width = `${this.width/2 + 2}px`;
+            snakeElement.x -= 1;
+            snakeElement.y -= 1;
+            (<HTMLElement>snakeElement.shadowRoot.querySelector('#zz')).style.backgroundColor = '#569c59';
         }
 
         for (let element of snakeElements) {
@@ -114,58 +117,44 @@ export class SnakeHead extends SnakeElement {
                 food.x = (Math.random() * (parseInt(this.parentElement.style.width) - food.width));
                 food.y = (Math.random() * (parseInt(this.parentElement.style.height) - food.height));
             }
+
+            if (specialFood.style.display == "block" && this.foodCollision(specialFood, element)) {
+                specialFood.x = (Math.random() * (parseInt(this.parentElement.style.width) - specialFood.width));
+                specialFood.y = (Math.random() * (parseInt(this.parentElement.style.height) - specialFood.height));
+            }
         }
+
+        
 
         const score = Score.getInstance().score;
 
         if(score > 30) {
             Score.getInstance().setSpeed(2);
-            if(this.speed != 9)
-                this.speed = 9;
+            if(this.speed != 7)
+                this.speed = 7;
             this.resetInterval();
         }
 
-        if(score > 150) {
+        if(score > 250) {
             Score.getInstance().setSpeed(3);
-            if(this.speed != 12)
-                this.speed = 12;
+            if(this.speed != 10)
+                this.speed = 10;
             this.resetInterval();
         }
 
-        if(score > 300) {
+        if(score > 700) {
             Score.getInstance().setSpeed(4);
-            if(this.speed != 15)
+            if(this.speed != 12)
                 this.speed = 15;
             this.resetInterval();
         }
 
-        if(score > 600) {
+        if(score > 2000) {
             Score.getInstance().setSpeed(5);
-            if(this.speed != 18)
-                this.speed = 18;
+            if(this.speed != 14)
+                this.speed = 14;
             this.resetInterval();
         }
-
-        // if(score < 50 && score >=20) {
-        //     Score.getInstance().setSpeed(2);
-        //     this.speed = 8;
-        // }
-
-        // if(score < 100 && score >=50) {
-        //     Score.getInstance().setSpeed(3);
-
-        //     this.speed = 11;
-        // }
-
-        // if(score < 250 && score >=100) {
-        //     Score.getInstance().setSpeed(4);
-        //     this.speed = 13;
-        // }
-
-        // if(score < 500 && score >=250) {
-        //     Score.getInstance().setSpeed(5);
-        //     this.speed = 15;
-        // }
 
         switch (this._direction) {
 
